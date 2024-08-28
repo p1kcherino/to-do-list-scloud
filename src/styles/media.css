@@ -1,0 +1,105 @@
+@media (min-width: 768px) {
+  .container {
+    padding: 48px 64px 60px 64px;
+  }
+
+  .todo__title {
+    margin-bottom: 40px;
+    line-height: 32px;
+  }
+
+  .todo__current-task-list {
+    flex-direction: row;
+    gap: 30px;
+  }
+
+  .todo__current-task,
+  .todo__add-task {
+    padding-block: 40px;
+  }
+
+  .form-add-task {
+    flex-direction: row-reverse;
+    justify-content: start;
+    gap: 15px;
+  }
+
+  .todo__add-task-btn {
+    width: 44px;
+  }
+
+  .symbol-btn {
+    display: flex;
+    margin-inline: auto;
+  }
+
+  .text-btn {
+    display: none;
+  }
+
+  .disable {
+    display: block;
+    margin-right: 9px;
+  }
+
+  .todo__tasks {
+    flex-direction: column;
+    padding: 40px;
+    background-color: var(--second-color);
+    border-radius: 50px;
+    gap: 24px;
+  }
+
+  .todo__tasks-title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .todo__tasks-item {
+    font-weight: 400;
+    background-color: transparent;
+    border-bottom: 1px solid var(--main-color);
+    border-radius: 0;
+    padding: 0;
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    gap: 28px;
+  }
+
+  .todo__tasks-items-button {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--main-text-color);
+    border: none;
+    max-width: fit-content;
+    background-color: var(--main-color);
+    padding: 5px 16px 5px 16px;
+    max-height: 28px;
+  }
+
+  .todo__footer {
+    min-height: 120px;
+  }
+}
+
+@media (min-width: 1366px) {
+  .container {
+    padding: 64px 82px 60px 82px;
+  }
+  .todo__inner {
+    flex-direction: row;
+    gap: 26px;
+  }
+  .todo__footer {
+    min-height: 148px;
+  }
+  .todo__board {
+    display: block;
+  }
+
+  .todo__board-title {
+    margin-bottom: 48px;
+  }
+}
