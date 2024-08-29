@@ -8,7 +8,6 @@ const formAddTask = document.querySelector(".form-add-task");
 const inputAddTask = document.querySelector(".todo__add-task-input");
 const clearButton = document.getElementById("clearButton");
 const tasksList = document.querySelector(".todo__tasks-list");
-const taskTitle = document.querySelector(".todo__tasks-items-title");
 const closeButton = document.querySelectorAll(".popup__close-btn");
 const popup = document.querySelector(".popup");
 const deleteTaskButton = document.getElementById("removeBtn");
