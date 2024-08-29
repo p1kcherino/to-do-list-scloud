@@ -7,8 +7,12 @@ import { openPopup, closePopup } from "./script/modal";
 const formAddTask = document.querySelector(".form-add-task");
 const inputAddTask = document.querySelector(".todo__add-task-input");
 const tasksList = document.querySelector(".todo__tasks-list");
+const taskTitle = document.querySelector(".todo__tasks-items-title");
 const closeButton = document.querySelectorAll(".popup__close-btn");
 const popup = document.querySelector(".popup");
+const deleteTaskButton = document.getElementById("removeBtn");
+const popupInput = popup.querySelector(".popup__input");
+const popupEditButton = popup.querySelector(".popup__btn-apply");
 
 formAddTask.addEventListener("submit", addTask);
 
@@ -26,7 +30,6 @@ function addTask(event) {
   };
 
   tasks.push(newTask);
-  console.log(tasks);
 
   const taskHTML = `
       <li class="todo__tasks-item" id="${newTask.id}" >
@@ -39,12 +42,13 @@ function addTask(event) {
   tasksList.insertAdjacentHTML("beforeend", taskHTML);
   inputAddTask.value = "";
   inputAddTask.focus();
-  deleteTask();
+  removeTask();
+  editTask();
 }
 
 let currentItemId = null;
 
-function deleteTask() {
+function removeTask() {
   tasksList.addEventListener("click", function (event) {
     if (event.target.tagName === "LI") {
       currentItemId = event.target.id;
@@ -52,16 +56,17 @@ function deleteTask() {
     }
   });
 
-  document.getElementById("removeBtn").addEventListener("click", function () {
-    if (currentItemId) {
-      const item = document.getElementById(currentItemId);
-      if (item) {
-        item.parentNode.removeChild(item);
-        closePopup(popup);
-      }
+  popupEditButton.addEventListener("click", function () {
+    const newText = popupInput.value;
+    const item = document.getElementById(currentItemId);
+    if (item) {
+      item.querySelector(".todo__tasks-items-title").textContent = newText;
+      closePopup(popup);
     }
   });
 }
+
+function editTask() {}
 
 closeButton.forEach((button) => {
   button.addEventListener("click", function () {
