@@ -43,15 +43,23 @@ function addTask(event) {
   inputAddTask.value = "";
   inputAddTask.focus();
   removeTask();
-  editTask();
 }
 
 let currentItemId = null;
 
 function removeTask() {
   tasksList.addEventListener("click", function (event) {
-    if (event.target.tagName === "LI") {
-      currentItemId = event.target.id;
+    if (
+      event.target.tagName === "LI" ||
+      event.target.tagName === "BUTTON" ||
+      event.target.tagName === "H4"
+    ) {
+      currentItemId = event.target.closest("li").id;
+      const taskText = event.target
+        .closest("li")
+        .querySelector(".todo__tasks-items-title")
+        .textContent.trim();
+      popupInput.value = taskText;
       openPopup(popup);
     }
   });
@@ -65,8 +73,6 @@ function removeTask() {
     }
   });
 }
-
-function editTask() {}
 
 closeButton.forEach((button) => {
   button.addEventListener("click", function () {
