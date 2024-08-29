@@ -14,11 +14,20 @@ const popup = document.querySelector(".popup");
 const deleteTaskButton = document.getElementById("removeBtn");
 const popupInput = popup.querySelector(".popup__input");
 const popupEditButton = popup.querySelector(".popup__btn-apply");
+const statusButtons = document.querySelectorAll(".popup__status-button");
 
 formAddTask.addEventListener("submit", addTask);
 
 let tasks = [];
 
+if (localStorage.getItem("tasks")) {
+  tasks = JSON.parse(localStorage.getItem("tasks"));
+  tasks.forEach(function (task) {
+    renderTask(task);
+  });
+  updateCount();
+  editTask();
+}
 function addTask(event) {
   event.preventDefault();
 
@@ -31,19 +40,13 @@ function addTask(event) {
   };
 
   tasks.push(newTask);
+  editTask();
+  saveToLocalStorage();
 
-  const taskHTML = `
-      <li class="todo__tasks-item" id="${newTask.id}" >
-          <h4 class="todo__tasks-items-title">
-              ${newTask.text}
-          </h4>
-          <button class="todo__tasks-items-button">${newTask.status}</button>
-      </li>`;
+  renderTask(newTask);
 
-  tasksList.insertAdjacentHTML("beforeend", taskHTML);
   inputAddTask.value = "";
   inputAddTask.focus();
-  editTask();
   updateCount();
 }
 
@@ -65,6 +68,7 @@ function editTask() {
       popupInput.focus();
       openPopup(popup);
       updateCount();
+      saveToLocalStorage();
     }
   });
 
@@ -76,6 +80,7 @@ function editTask() {
         tasks = tasks.filter((task) => task.id !== parseInt(currentItemId));
         closePopup(popup);
         updateCount();
+        saveToLocalStorage();
       }
     }
   });
@@ -86,6 +91,7 @@ function editTask() {
     if (item) {
       item.querySelector(".todo__tasks-items-title").textContent = newText;
       closePopup(popup);
+      saveToLocalStorage();
     }
   });
 }
@@ -110,6 +116,7 @@ function updateCount() {
   document.getElementById("openCount").textContent = openCount;
   document.getElementById("closeCount").textContent = closeCount;
   document.getElementById("inProgressCount").textContent = inProgressCount;
+  saveToLocalStorage();
 }
 
 function changeStatus(taskId, newStatus) {
@@ -121,15 +128,31 @@ function changeStatus(taskId, newStatus) {
       item.querySelector(".todo__tasks-items-button").textContent = newStatus;
     }
     updateCount();
+    saveToLocalStorage();
   }
 }
-
-const statusButtons = document.querySelectorAll(".popup__status-button");
 
 statusButtons.forEach((button) => {
   button.addEventListener("click", function () {
     const newStatus = button.getAttribute("data-status");
     changeStatus(currentItemId, newStatus);
     closePopup(popup);
+    saveToLocalStorage();
   });
 });
+
+function saveToLocalStorage() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function renderTask(task) {
+  const taskHTML = `
+  <li class="todo__tasks-item" id="${task.id}" >
+      <h4 class="todo__tasks-items-title">
+          ${task.text}
+      </h4>
+      <button class="todo__tasks-items-button">${task.status}</button>
+  </li>`;
+
+  tasksList.insertAdjacentHTML("beforeend", taskHTML);
+}
