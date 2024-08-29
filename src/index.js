@@ -152,6 +152,5 @@ function renderTask(task) {
       </h4>
       <button class="todo__tasks-items-button">${task.status}</button>
   </li>`;
-
   tasksList.insertAdjacentHTML("beforeend", taskHTML);
 }

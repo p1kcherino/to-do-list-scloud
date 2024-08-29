@@ -7,7 +7,7 @@
   </head>
   <body>
     <div class="todo bg-color-top">
-      <div class="container bg-color-top">
+      <div class="container">
         <h1 class="todo__title">ToDo List Scloud</h1>
         <div class="todo__inner">
           <div class="todo__current-task">
@@ -64,38 +64,30 @@
           <ul id="tasksList" class="todo__tasks-list">
 
           </ul>
-          </div>
         </div>
+        <button class="todo_more-tasks-button" id="moreButton"> <span>Показать больше </span><img src="<%=require('./img/chevron-down.svg')%>" alt="Галка на кнопку"></button>
       </div>
+     </div>
       <div class="todo__board">
         <div class="container bg-color-botton">
           <h1 class="todo__board-title">Доска задач</h1>
           <div class="todo__board-inner">
             <div class="todo__board-open-tasks">
               <h4 class="todo__board-open-subtitle">Открыто</h4>
-              <ul class="todo__board-open-list">
-                <li class="todo__board-open-item">Сварить пельмени</li>
-                <li class="todo__board-open-item">
-                  Поднять инфраструктуру проекта
-                </li>
+              <ul class="todo__board-open-list" id="openCount">
+                <li class="todo__board-open-item"></li>
               </ul>
             </div>
             <div class="todo__board-atwork-tasks">
-              <h4 class="todo__board-atwork-subtitle">В работе</h4>
+              <h4 class="todo__board-atwork-subtitle" >В работе</h4>
               <ul class="todo__board-atwork-list">
-                <li class="todo__board-atwork-item">
-                  Проснуться, улыбнуться, сделать отжимания, слетать на Марс и
-                  прочитать книгу
-                </li>
-                <li class="todo__board-atwork-item">Поругаться с девопсом</li>
+                <li class="todo__board-atwork-item" id="inProgressCount"></li>
               </ul>
             </div>
             <div class="todo__board-atwork-tasks">
               <h4 class="todo__board-atwork-subtitle">Закрыто</h4>
               <ul class="todo__board-atwork-list">
-                <li class="todo__board-atwork-item">
-                  Спеть - Знаешь ли ты, вдоль ночных дорог
-                </li>
+                <li class="todo__board-atwork-item" id="closeCount"></li>
               </ul>
             </div>
           </div>
@@ -116,7 +108,7 @@
             placeholder="Текст задачи, который можно изменить"
           />
           <div class="popup__inner-status">
-            <button class="popup__status-button" data-status="Открыт">Отложить</button>
+            <button class="popup__status-button" data-status="Открыт">Открыт</button>
             <button class="popup__status-button" data-status="В работе">В работе</button>
             <button class="popup__status-button" data-status="Закрыт">Закрыт</button>
           </div>
@@ -136,4 +128,3 @@
     </div>
   </body>
 </html>
-      <div class="popup popup__change-task">

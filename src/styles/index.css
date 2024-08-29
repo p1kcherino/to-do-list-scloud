@@ -158,6 +158,22 @@ body {
   font-size: 14px;
 }
 
+.todo_more-tasks-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: 193px;
+  border: 1px solid var(--second-text-color);
+  height: 48px;
+  border-radius: 50px;
+  color: var(--second-text-color);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  margin-top: 24px;
+}
+
 .todo__footer {
   border-radius: 24px 24px 0 0;
   background-color: var(--footer-color);
@@ -208,4 +224,10 @@ body {
   background-color: var(--second-color);
   border-radius: 24px;
   padding: 24px 32px;
+}
+
+.todo__board-atwork-tasks,
+.todo__board-open-tasks,
+.todo__board-done-tasks {
+  width: 100%;
 }

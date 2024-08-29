@@ -79,6 +79,10 @@
     max-height: 28px;
   }
 
+  .todo_more-tasks-button {
+    margin-top: 32px;
+  }
+
   .todo__footer {
     min-height: 120px;
   }
@@ -109,5 +113,9 @@
 
   .form-add-task:hover #clearButton {
     opacity: 1;
+  }
+
+  .todo_more-tasks-button {
+    margin-top: 40px;
   }
 }
