@@ -73,7 +73,9 @@ function editTask() {
       const item = document.getElementById(currentItemId);
       if (item) {
         item.parentNode.removeChild(item);
+        tasks = tasks.filter((task) => task.id !== parseInt(currentItemId));
         closePopup(popup);
+        updateCount();
       }
     }
   });
