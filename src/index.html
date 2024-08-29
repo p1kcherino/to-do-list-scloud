@@ -6,7 +6,7 @@
     <title>ToDo List Scloud</title>
   </head>
   <body>
-    <div class="todo">
+    <div class="todo bg-color-top">
       <div class="container bg-color-top">
         <h1 class="todo__title">ToDo List Scloud</h1>
         <div class="todo__inner">
@@ -61,35 +61,7 @@
             <h3 class="disable">Статус</h3>
           </div>
           <ul id="tasksList" class="todo__tasks-list">
-            <div class="popup popup__change-task">
-                <li>
-                <div class="popup__content">
-                  <div class="popup__inner-title">
-                    <h5 class="popup__title">Изменение задачи</h5>
-                    <button class="popup__close-btn">
-                      <img src="<%=require("./img/XL_x.svg")%>" alt="Крести
-                      закрытия" />
-                    </button>
-                  </div>
-                  <input
-                    type="text"
-                    class="popup__input"
-                    placeholder="Текст задачи, который можно изменить"
-                  />
-                  <div class="popup__inner-status"></div>
-                  <div class="popup__buttons">
-                    <button class="popup__btn-apply">Применить</button>
-                    <button
-                      data-action="delete"
-                      id="delete-btn"
-                      class="popup__btn-delete delete"
-                    >
-                      Удалить задачу
-                    </button>
-                  </div>
-                </div>
-                </li>
-            </div>
+
           </ul>
           </div>
         </div>
@@ -128,7 +100,35 @@
           </div>
         </div>
       </div>
+      <div class="popup popup__change-task">
+        <div class="popup__content">
+          <div class="popup__inner-title">
+            <h5 class="popup__title">Изменение задачи</h5>
+            <button class="popup__close-btn">
+              <img src="<%=require("./img/XL_x.svg")%>" alt="Крестик
+              закрытия" />
+            </button>
+          </div>
+          <input
+            type="text"
+            class="popup__input"
+            placeholder="Текст задачи, который можно изменить"
+          />
+          <div class="popup__inner-status"></div>
+          <div class="popup__buttons">
+            <button class="popup__btn-apply">Применить</button>
+            <button
+              data-action="delete"
+              id="removeBtn"
+              class="popup__btn-delete delete"
+            >
+              Удалить задачу
+            </button>
+          </div>
+        </div>
+      </div>
       <div class="todo__footer"></div>
     </div>
   </body>
 </html>
+      <div class="popup popup__change-task">

@@ -7,104 +7,64 @@ import { openPopup, closePopup } from "./script/modal";
 const formAddTask = document.querySelector(".form-add-task");
 const inputAddTask = document.querySelector(".todo__add-task-input");
 const tasksList = document.querySelector(".todo__tasks-list");
-const closeButton = document.querySelector(".popup__close-btn");
+const closeButton = document.querySelectorAll(".popup__close-btn");
 const popup = document.querySelector(".popup");
 
 formAddTask.addEventListener("submit", addTask);
+
+let tasks = [];
 
 function addTask(event) {
   event.preventDefault();
 
   const taskText = inputAddTask.value;
+
+  const newTask = {
+    id: Date.now(),
+    text: taskText,
+    buttonText: "Открыт",
+  };
+
+  tasks.push(newTask);
+  console.log(tasks);
+
   const taskHTML = `
-       <li class="todo__tasks-item">
+      <li class="todo__tasks-item" id="${newTask.id}" >
           <h4 class="todo__tasks-items-title">
-              ${taskText}
+              ${newTask.text}
           </h4>
-          <button class="todo__tasks-items-button" >Открыт</button>
+          <button class="todo__tasks-items-button">${newTask.buttonText}</button>
       </li>`;
 
   tasksList.insertAdjacentHTML("beforeend", taskHTML);
   inputAddTask.value = "";
   inputAddTask.focus();
+  deleteTask();
 }
 
-tasksList.addEventListener("click", deleteTask);
+let currentItemId = null;
 
-function deleteTask(event) {
-  if (event.target.dataset.action === "delete") {
-    const parent = event.target.closest(".todo__tasks-item");
-    console.log(parent);
-  }
-}
-
-tasksList.addEventListener("click", () => {
-  openPopup(popup);
-});
-
-/* closeButton.forEach((button) => {
-  button.addEventListener("click", () => {
-    closePopup(button.closest(".popup_is-opened"));
+function deleteTask() {
+  tasksList.addEventListener("click", function (event) {
+    if (event.target.tagName === "LI") {
+      currentItemId = event.target.id;
+      openPopup(popup);
+    }
   });
-}); */
 
-/* 
-const openPopupBtn = document.querySelector(".todo__tasks-items-button");
-const popup = document.querySelector(".popup");
-const todoTasksList = document.querySelector(".todo__tasks-list"); 
-const todoTasksItem = todoTasksList.querySelector(".todo__tasks-item");
-const todoTaskTitle = document.querySelector(".todo__tasks-items-title");
-const deleteButtonTask = document.getElementById("delete-btn");
-const inputPopup = document.querySelector(".popup__input");
-let todos = []; */
-/* function todoLocal() {
-  todos = todoTasksList.innerHTML;
-  localStorage.setItem("todos", todos);
+  document.getElementById("removeBtn").addEventListener("click", function () {
+    if (currentItemId) {
+      const item = document.getElementById(currentItemId);
+      if (item) {
+        item.parentNode.removeChild(item);
+        closePopup(popup);
+      }
+    }
+  });
 }
-
-if (localStorage.getItem("todos")) {
-  todoTasksList.innerHTML = localStorage.getItem("todos");
-} */
-/* formAddTask.addEventListener('submit', createTask)
-addTaskButton.addEventListener("click", createTask);
-
-function createTask(event) {
-  event.preventDefault();
-  let createElement = document.createElement("li");
-  createElement.className = "todo__tasks-item";
-  todoTasksList.appendChild(createElement);
-  createElement.id = "";
-  let h4 = document.createElement("h4");
-  h4.className = "todo__tasks-items-title";
-  h4.textContent = inputAddTask.value;
-  let createButtonElement = document.createElement("button");
-  createButtonElement.className = "todo__tasks-items-button";
-  createButtonElement.textContent = "Открыт";
-
-  createElement.appendChild(h4);
-  createElement.appendChild(createButtonElement);
-  todoLocal();
-  inputAddTask.value = "";
-}
-
-todoTasksList.addEventListener("click", () => {
-  openPopup(popup);
-});
 
 closeButton.forEach((button) => {
-  button.addEventListener("click", () => {
+  button.addEventListener("click", function () {
     closePopup(button.closest(".popup_is-opened"));
   });
 });
-
-deleteButtonTask.addEventListener("click", deleteTask);
-
-function deleteTask(event) {
-  if (event.target.dataset.action === "delete") {
-    let listElement = document.querySelector(".todo__tasks-item");
-    let listItem = listElement.parentNode;
-    let list = listItem.parentNode;
-    list.removeChild(listItem);
-  }
-}
- */
