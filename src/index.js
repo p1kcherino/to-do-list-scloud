@@ -42,12 +42,12 @@ function addTask(event) {
   tasksList.insertAdjacentHTML("beforeend", taskHTML);
   inputAddTask.value = "";
   inputAddTask.focus();
-  removeTask();
+  editTask();
 }
 
 let currentItemId = null;
 
-function removeTask() {
+function editTask() {
   tasksList.addEventListener("click", function (event) {
     if (
       event.target.tagName === "LI" ||
@@ -60,7 +60,18 @@ function removeTask() {
         .querySelector(".todo__tasks-items-title")
         .textContent.trim();
       popupInput.value = taskText;
+      popupInput.focus();
       openPopup(popup);
+    }
+  });
+
+  deleteTaskButton.addEventListener("click", function () {
+    if (currentItemId) {
+      const item = document.getElementById(currentItemId);
+      if (item) {
+        item.parentNode.removeChild(item);
+        closePopup(popup);
+      }
     }
   });
 
