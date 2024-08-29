@@ -27,7 +27,7 @@ function addTask(event) {
   const newTask = {
     id: Date.now(),
     text: taskText,
-    buttonText: "Открыт",
+    status: "Открыт",
   };
 
   tasks.push(newTask);
@@ -37,7 +37,7 @@ function addTask(event) {
           <h4 class="todo__tasks-items-title">
               ${newTask.text}
           </h4>
-          <button class="todo__tasks-items-button">${newTask.buttonText}</button>
+          <button class="todo__tasks-items-button">${newTask.status}</button>
       </li>`;
 
   tasksList.insertAdjacentHTML("beforeend", taskHTML);
@@ -100,11 +100,11 @@ closeButton.forEach((button) => {
 });
 
 function updateCount() {
-  const openCount = tasks.filter((task) => tasks.status === "Открыт").length;
+  const openCount = tasks.filter((task) => task.status === "Открыт").length;
   const inProgressCount = tasks.filter(
-    (task) => tasks.status === "В работе"
+    (task) => task.status === "В работе"
   ).length;
-  const closeCount = tasks.filter((task) => tasks.status === "Закрыт").length;
+  const closeCount = tasks.filter((task) => task.status === "Закрыт").length;
   document.getElementById("openCount").textContent = openCount;
   document.getElementById("closeCount").textContent = closeCount;
   document.getElementById("inProgressCount").textContent = inProgressCount;
@@ -118,7 +118,7 @@ function changeStatus(taskId, newStatus) {
     if (item) {
       item.querySelector(".todo__tasks-items-button").textContent = newStatus;
     }
-    updateCount(); // Обновляем счетчики
+    updateCount();
   }
 }
 
@@ -127,10 +127,7 @@ const statusButtons = document.querySelectorAll(".popup__status-button");
 statusButtons.forEach((button) => {
   button.addEventListener("click", function () {
     const newStatus = button.getAttribute("data-status");
-    const item = document.getElementById(currentItemId);
-    if (item) {
-      item.querySelector(".todo__tasks-items-button").textContent = newStatus;
-      closePopup(popup);
-    }
+    changeStatus(currentItemId, newStatus);
+    closePopup(popup);
   });
 });
