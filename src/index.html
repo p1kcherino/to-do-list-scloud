@@ -15,21 +15,21 @@
             <ul class="todo__current-task-list">
               <li class="todo__current-task-item">
                 <img src="<%=require('./img/open.svg')%>" alt="Синий значок" />
-                <span class="todo__current-title">Открыто - <span class="open">1</span></span>
+                <span class="todo__current-title">Открыто - <span id="openCount">0</span></span>
               </li>
               <li class="todo__current-task-item">
                 <img
                   src="<%=require('./img/at-work.svg')%>"
                   alt="Оранжевый значок"
                 />
-                <span class="todo__current-title">В работе - <span class="at-work">1</span></span>
+                <span class="todo__current-title">В работе - <span id="inProgressCount">0</span></span>
               </li>
               <li class="todo__current-task-item">
                 <img
                   src="<%=require('./img/close.svg')%>"
                   alt="Зеленый значок"
                 />
-                <span class="todo__current-title">Закрыто - <span class="done">1</span></span>
+                <span>Закрыто - <span id="closeCount">0</span></span>
               </li>
             </ul>
           </div>
@@ -44,6 +44,7 @@
                 placeholder="Текст"
                 minlength="1"
               />
+              <p id="clearButton" class="clear-button"><img src="<%=require('./img/input-clear.svg')%>" alt="Кнопка очистки"></p>
               <button class="todo__add-task-btn">
                 <span class="text-btn"> Добавить задачу </span>
                 <img
@@ -114,7 +115,11 @@
             class="popup__input"
             placeholder="Текст задачи, который можно изменить"
           />
-          <div class="popup__inner-status"></div>
+          <div class="popup__inner-status">
+            <button class="popup__status-button" data-status="Открыт">Отложить</button>
+            <button class="popup__status-button" data-status="В работе">В работе</button>
+            <button class="popup__status-button" data-status="Закрыт">Закрыт</button>
+          </div>
           <div class="popup__buttons">
             <button class="popup__btn-apply">Применить</button>
             <button

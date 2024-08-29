@@ -102,4 +102,12 @@
   .todo__board-title {
     margin-bottom: 48px;
   }
+
+  #clearButton {
+    opacity: 0;
+  }
+
+  .form-add-task:hover #clearButton {
+    opacity: 1;
+  }
 }

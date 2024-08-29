@@ -6,6 +6,7 @@ import { openPopup, closePopup } from "./script/modal";
 
 const formAddTask = document.querySelector(".form-add-task");
 const inputAddTask = document.querySelector(".todo__add-task-input");
+const clearButton = document.getElementById("clearButton");
 const tasksList = document.querySelector(".todo__tasks-list");
 const taskTitle = document.querySelector(".todo__tasks-items-title");
 const closeButton = document.querySelectorAll(".popup__close-btn");
@@ -43,6 +44,7 @@ function addTask(event) {
   inputAddTask.value = "";
   inputAddTask.focus();
   editTask();
+  updateCount();
 }
 
 let currentItemId = null;
@@ -62,6 +64,7 @@ function editTask() {
       popupInput.value = taskText;
       popupInput.focus();
       openPopup(popup);
+      updateCount();
     }
   });
 
@@ -85,8 +88,49 @@ function editTask() {
   });
 }
 
+clearButton.addEventListener("click", function (event) {
+  event.preventDefault();
+  inputAddTask.value = "";
+});
+
 closeButton.forEach((button) => {
   button.addEventListener("click", function () {
     closePopup(button.closest(".popup_is-opened"));
+  });
+});
+
+function updateCount() {
+  const openCount = tasks.filter((task) => tasks.status === "Открыт").length;
+  const inProgressCount = tasks.filter(
+    (task) => tasks.status === "В работе"
+  ).length;
+  const closeCount = tasks.filter((task) => tasks.status === "Закрыт").length;
+  document.getElementById("openCount").textContent = openCount;
+  document.getElementById("closeCount").textContent = closeCount;
+  document.getElementById("inProgressCount").textContent = inProgressCount;
+}
+
+function changeStatus(taskId, newStatus) {
+  const task = tasks.find((task) => task.id === parseInt(taskId));
+  if (task) {
+    task.status = newStatus;
+    const item = document.getElementById(taskId);
+    if (item) {
+      item.querySelector(".todo__tasks-items-button").textContent = newStatus;
+    }
+    updateCount(); // Обновляем счетчики
+  }
+}
+
+const statusButtons = document.querySelectorAll(".popup__status-button");
+
+statusButtons.forEach((button) => {
+  button.addEventListener("click", function () {
+    const newStatus = button.getAttribute("data-status");
+    const item = document.getElementById(currentItemId);
+    if (item) {
+      item.querySelector(".todo__tasks-items-button").textContent = newStatus;
+      closePopup(popup);
+    }
   });
 });
